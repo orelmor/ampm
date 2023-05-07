@@ -10,7 +10,7 @@ interface ProductCardProps {
 function ProductCard(props: ProductCardProps): JSX.Element {
     return (
         <div className="ProductCard">
-			
+			{props.product.categoryName}
         </div>
     );
 }
