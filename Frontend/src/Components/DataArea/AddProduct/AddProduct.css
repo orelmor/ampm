@@ -1,3 +1,65 @@
 .AddProduct {
-	
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.AddProduct h2 {
+  margin: 15px;
+
+}
+
+.AddProduct label {
+  font-weight: 800;
+  font-size: large;
+  text-decoration: underline;
+  margin-top: 25px;
+}
+
+.AddProduct form {
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  display: flex;
+  flex-direction:column;
+  width:75%;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.AddProduct input[type="text"],
+input[type="email"],
+input[type="password"] {
+
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.AddProduct input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.AddProduct .sub {
+  
+
+  margin-top: 7px;
+
+}
+
+.AddProduct .sub:hover {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #333;
+
 }

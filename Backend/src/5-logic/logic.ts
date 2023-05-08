@@ -14,46 +14,62 @@ async function getAllCategories(): Promise<CategoryModel[]> {
     return categories
 }
 
-async function getAllProducts():Promise<ProductModel[]> {
+async function getAllProducts(): Promise<ProductModel[]> {
     const sql = `SELECT * FROM products`
 
     const products = await dal.execute(sql)
     return products
 }
 
-async function getProductsByCategory(category:number): Promise<ProductModel[]> {
-    const sql = `
-    SELECT P.*, C.categoryName
-    FROM products AS P JOIN categories AS C
-    ON P.categoryId = C.categoryId
-    WHERE P.categoryId = ?
-     
-     `
-     const products = await dal.execute(sql,[category])
+async function getProductsByCategory(category: number): Promise<ProductModel[]> {
 
-     return products
+    let products = []
+    if (category === 0) {
+        const sql = `
+        SELECT P.*, C.categoryName
+        FROM products AS P JOIN categories AS C
+        ON P.categoryId = C.categoryId
+         
+         `
+        products = await dal.execute(sql)
+
+
+    } else {
+        const sql = `
+        SELECT P.*, C.categoryName
+        FROM products AS P JOIN categories AS C
+        ON P.categoryId = C.categoryId
+        WHERE P.categoryId = ?
+         
+         `
+        products = await dal.execute(sql, [category])
+
+    }
+
+
+    return products
 }
 
-async function addNewProducts(product:ProductModel):Promise<ProductModel>{
+async function addNewProducts(product: ProductModel): Promise<ProductModel> {
 
     const sql = `
         INSERT INTO products VALUES(DEFAULT,?,?,?,?,?)
     `
-    const info:OkPacket = await dal.execute(sql,
-        [product.name,product.manefactureDate,product.expireDate,product.categoryId,product.price])
+    const info: OkPacket = await dal.execute(sql,
+        [product.name, product.manefactureDate, product.expireDate, product.categoryId, product.price])
 
     product.code = info.insertId
 
     return product
 }
 
-async function deleteProduct(codeToDelete:number):Promise<void>{
+async function deleteProduct(codeToDelete: number): Promise<void> {
 
-    const sql =`DELETE  FROM products WHERE code=?`
+    const sql = `DELETE  FROM products WHERE code=?`
 
-    const info:OkPacket = await dal.execute(sql,[codeToDelete])
+    const info: OkPacket = await dal.execute(sql, [codeToDelete])
 
-    if(info.affectedRows === 0) throw new ResourceNotFoundErrorModel(codeToDelete)
+    if (info.affectedRows === 0) throw new ResourceNotFoundErrorModel(codeToDelete)
 
 
 }

@@ -27,7 +27,7 @@ class ProductService {
     }
 
     async postNewProduct(product:ProductModel):Promise<void>{
-
+     
         const response = await axios.post<ProductModel>(appConfig.productsUrl,product)
 
         const addedProduct = response.data

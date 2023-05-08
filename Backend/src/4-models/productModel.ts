@@ -6,7 +6,7 @@ class ProductModel{
     public manefactureDate : string
     public expireDate : string
     public categoryId: number
-    public price: number
+    public price: string
     public categoryName:string
 
     public constructor(prod:ProductModel){

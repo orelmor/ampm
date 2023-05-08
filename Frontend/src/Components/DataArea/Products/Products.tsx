@@ -37,11 +37,10 @@ function Products(): JSX.Element {
 
     return (
         <div className="Products">
-
-            
             <h2>Products</h2>
             <label >Choose category: </label>
             <select defaultValue='' onChange={showProducts}>
+                <option  value={0}>All products</option>
                 {categories.map(category =>
                     <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
                 )}
