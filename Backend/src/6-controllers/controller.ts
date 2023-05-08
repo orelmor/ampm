@@ -15,6 +15,17 @@ router.get("/categories", async (request: Request, response: Response, next: Nex
     }
 });
 
+// GET http://localhost:3001/api/_____
+router.get("/products", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const products = await logic.getAllProducts()
+        response.json(products).sendStatus(200)
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
 router.get("/products/:category", async (request: Request, response: Response, next: NextFunction) => {
     try {
         const category = +request.params.category

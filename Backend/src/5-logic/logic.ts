@@ -14,6 +14,13 @@ async function getAllCategories(): Promise<CategoryModel[]> {
     return categories
 }
 
+async function getAllProducts():Promise<ProductModel[]> {
+    const sql = `SELECT * FROM products`
+
+    const products = await dal.execute(sql)
+    return products
+}
+
 async function getProductsByCategory(category:number): Promise<ProductModel[]> {
     const sql = `
     SELECT P.*, C.categoryName
@@ -53,6 +60,7 @@ async function deleteProduct(codeToDelete:number):Promise<void>{
 
 
 export default {
+    getAllProducts,
     getAllCategories,
     getProductsByCategory,
     addNewProducts,

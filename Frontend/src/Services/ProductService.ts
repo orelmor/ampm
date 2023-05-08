@@ -13,6 +13,12 @@ class ProductService {
         
     }
 
+    async gelAllProducts():Promise<ProductModel[]>{
+        const response = await axios.get<ProductModel[]>(appConfig.productsUrl)
+        const products = response.data
+        return products
+    }
+
     async getProductsByCategory(category:number):Promise<ProductModel[]>{
 
         const response = await axios.get<ProductModel[]>(appConfig.productsUrl + category)
@@ -35,6 +41,6 @@ class ProductService {
 
 }
 
-const dataService = new ProductService();
+const productService = new ProductService();
 
-export default dataService;
+export default productService;
