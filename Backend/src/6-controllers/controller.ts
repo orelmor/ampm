@@ -1,11 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 import logic from "../5-logic/logic";
 import ProductModel from "../4-models/productModel";
+import verifyLoggedIn from "../3-middleware/verify-loggedIn";
+import verifyAdmin from "../3-middleware/verify-admin";
 
 const router = express.Router(); // Capital R
 
 // GET http://localhost:3001/api/_____
-router.get("/categories", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/categories", [verifyAdmin],async (request: Request, response: Response, next: NextFunction) => {
     try {
         const categories = await logic.getAllCategories()
         response.json(categories).sendStatus(200)
@@ -16,7 +18,7 @@ router.get("/categories", async (request: Request, response: Response, next: Nex
 });
 
 // GET http://localhost:3001/api/_____
-router.get("/products", async (request: Request, response: Response, next: NextFunction) => {
+router.get("/products",[verifyLoggedIn], async (request: Request, response: Response, next: NextFunction) => {
     try {
         const products = await logic.getAllProducts()
         response.json(products).sendStatus(200)

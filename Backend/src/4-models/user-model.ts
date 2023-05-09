@@ -5,7 +5,7 @@ class UserModel {
     public id: number
     public firstName:string
     public lastName:string
-    public userName:string
+    public username:string
     public password:string
     public role:RoleModel
 
@@ -13,7 +13,7 @@ class UserModel {
         this.id =user.id
         this.firstName =user.firstName
         this.lastName =user.lastName
-        this.userName =user.userName
+        this.username =user.username
         this.password =user.password
         this.role =user.role
     }
@@ -22,8 +22,9 @@ class UserModel {
         id:Joi.number().optional().integer().positive(),
         firstName: Joi.string().required().min(2).max(25),
         lastName: Joi.string().required().min(2).max(25),
-        userName: Joi.string().required().min(2).max(25),
-        password: Joi.string().required().min(2).max(25)
+        username: Joi.string().required().min(2).max(25),
+        password: Joi.string().required().min(2).max(25),
+        role: Joi.optional()
     })
 
     public validate():string{
